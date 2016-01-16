@@ -11,21 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116022755) do
+ActiveRecord::Schema.define(version: 20160116061518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.string  "first_name"
     t.string  "last_name"
-    t.integer "age"
     t.string  "gender"
     t.integer "father_id"
     t.integer "mother_id"
+    t.date    "dob"
   end
 
-  add_index "users", ["father_id"], name: "index_users_on_father_id", using: :btree
-  add_index "users", ["mother_id"], name: "index_users_on_mother_id", using: :btree
+  add_index "people", ["father_id"], name: "index_people_on_father_id", using: :btree
+  add_index "people", ["mother_id"], name: "index_people_on_mother_id", using: :btree
 
 end
