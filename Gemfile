@@ -39,7 +39,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'         # Rails testing
   gem 'factory_girl_rails'  # Generate fixtures for testing
-
+  gem 'shoulda'             # rspec model testing
   gem 'better_errors'       # Display a better error page on development webpage
   gem 'awesome_print'       # Pretty prints Ruby objects for inspection
 end
