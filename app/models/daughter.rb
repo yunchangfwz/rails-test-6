@@ -1,11 +1,8 @@
-class Daughter < ActiveRecord::Base
-  belongs_to :father, :class_name => 'Father', :foreign_key => 'father_id'
-
+class Daughter < Child
   extend Enumerize
   enumerize :gender, in: [:female]
 
   def say_something
-    "hello I'm your aughter"
+    "hello I'm your daughter"
   end
-
 end
