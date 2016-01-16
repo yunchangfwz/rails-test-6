@@ -4,23 +4,40 @@ RSpec.describe Person, type: :model do
   context 'validations' do
     it { is_expected.to validate_presence_of :first_name }
     it { is_expected.to validate_presence_of :last_name }
-    it { is_expected.to enumerize(:gender).in(:male, :female)}
   end
 
   describe '#ensure_valid_age?' do
-    let(:person)  { build(:person) }
+    let(:yunchang)  { build(:person) }
     context 'valid' do
       it "#{Date.today}" do
-        person.dob = Date.today + 1.days
-        expect(person).to be_valid
+        yunchang.dob = Date.today + 1.days
+        expect(yunchang).to be_valid
       end
     end
 
     context 'invalid' do
       dob = Date.today  - 1.days
       it "#{dob}" do
-        person.dob = dob
-        expect(person).to_not be_valid
+        yunchang.dob = dob
+        expect(yunchang).to_not be_valid
+      end
+    end
+  end
+
+  describe 'Older than' do
+    let(:yunchang)  { build(:person) }
+    let(:james)     { build(:person, dob: Date.today - 2.years ) }
+    let(:robin)     { build(:person, dob: Date.today - 3.years ) }
+    let(:oliver)    { build(:person, dob: Date.today - 1.years ) }
+    context 'Age' do
+      it "Yunchang have the same age with James" do
+        expect(yunchang.older_than(james)).to eq 0
+      end
+      it "Yunchang is stronger than Robin" do
+        expect(yunchang.older_than(robin)).to eq -1
+      end
+      it "Yunchang is older than Oliver" do
+        expect(yunchang.older_than(oliver)).to eq 1
       end
     end
   end

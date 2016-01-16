@@ -4,8 +4,23 @@ class Person < ActiveRecord::Base
   validates :dob,         presence: true
   validate  :ensure_valid_age
   
+  # before_action :change_class
+  
   
   MIN_AGE = 0
+
+  def change_class
+    becomes Father if is_father?
+    becomes Mother if is_mother?
+  end
+
+  def is_father?
+    true if Person.find_by(father_id: id).present?
+  end
+
+  def is_mother?
+    true if Person.find_by(mother_id: id).present?
+  end
 
   def age
     ((Date.today - dob) / 365).floor
@@ -25,6 +40,10 @@ class Person < ActiveRecord::Base
   
   def mother_of?(person)
     false
+  end
+
+  def older_than(person)
+    age - person.age
   end
 
   def parents
