@@ -2,6 +2,9 @@ class Child < Person
   belongs_to :father, :class_name => 'Father', :foreign_key => 'father_id'
   belongs_to :mother, :class_name => 'Mother', :foreign_key => 'mother_id'
 
+  validates :father_id,  presence: true
+  validates :mother_id,  presence: true
+  validates :last_name,  presence: true
   validate  :age_smaller_than_parent
 
   extend Enumerize

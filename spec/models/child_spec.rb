@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Child, type: :model do
   context 'validations' do
+    it { is_expected.to validate_presence_of :father_id }
+    it { is_expected.to validate_presence_of :mother_id }
     it { is_expected.to enumerize(:gender).in(:male, :female)}
   end
 
@@ -11,7 +13,9 @@ RSpec.describe Child, type: :model do
   end
 
   describe 'say something' do 
-    let!(:child)   { create(:child) } 
+    let!(:father)  { create(:father) } 
+    let!(:mother)  { create(:mother) } 
+    let!(:child)   { create(:child, father: father, mother: mother) } 
 
     it 'father_of child -> true' do 
       expect( child.say_something).to eq "Hello, I'm is a child"
@@ -19,10 +23,11 @@ RSpec.describe Child, type: :model do
   end
 
   describe '#age_smaller_than_parent?' do
+    let(:suka)      { create(:mother, dob: Date.today  - 20.years) }
     let(:yunchang)  { create(:father, dob: Date.today  - 20.years) }
     let(:james)     { create(:father, dob: Date.today  - 40.years) }
-    let(:david)     { build(:child, father_id: yunchang.id) }
-    let(:lyly)      { build(:child, father_id: james.id) }
+    let(:david)     { build(:child, father: yunchang, mother: suka ) }
+    let(:lyly)      { build(:child, father: james) }
     context 'valid' do
       it "Have valid" do
         expect(david).to be_valid

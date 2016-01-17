@@ -7,7 +7,9 @@ RSpec.describe Daughter, type: :model do
   end
 
   describe 'say something' do 
-    let!(:lyly)   { create(:daughter) } 
+    let!(:yunchang) { create(:father) } 
+    let!(:suka)     { create(:mother) } 
+    let!(:lyly)     { create(:daughter, father: yunchang, mother: suka) } 
 
     it 'father_of child -> true' do 
       expect( lyly.say_something).to eq "Hello, I'm your daughter"

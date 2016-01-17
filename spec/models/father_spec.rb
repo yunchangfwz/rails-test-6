@@ -30,24 +30,26 @@ RSpec.describe Father, type: :model do
   end
 
   describe 'function father_of' do 
-    let!(:father) { create(:father, dob: Date.today - 20.years) }
-    let!(:child)   { create(:child, father: father) } 
-    let!(:another_child)   { create(:child) } 
+    let(:david)    { create(:father) }
+    let(:yunchang) { create(:father, dob: Date.today - 20.years) }
+    let(:suka)     { create(:mother) }
+    let(:tintin)   { create(:child, father: yunchang, mother: suka) } 
+    let(:tantan)   { create(:child, father: david,    mother: suka) } 
 
     it 'father_of child -> true' do 
-      expect(father.father_of?(child) ).to eq true
+      expect(yunchang.father_of?(tintin) ).to eq true
     end
 
     it 'father_of child -> false' do 
-      expect(father.father_of?(another_child) ).to eq false
+      expect(yunchang.father_of?(tantan) ).to eq false
     end
   end
 
   describe 'say something' do 
-    let!(:father)   { create(:father, dob: Date.today - 30.year) } 
+    let(:yunchang)   { create(:father, dob: Date.today - 30.year) } 
 
     it 'father_of child -> true' do 
-      expect( father.say_something).to eq "Hello, I am your father."
+      expect( yunchang.say_something).to eq "Hello, I am your father."
     end
   end
 end

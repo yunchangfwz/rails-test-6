@@ -7,7 +7,9 @@ RSpec.describe Son, type: :model do
   end
 
   describe 'say something' do 
-    let!(:david)   { create(:son) } 
+    let!(:yunchang) { create(:father) } 
+    let!(:suka)     { create(:mother) } 
+    let!(:david)   { create(:son, father: yunchang, mother: suka) } 
 
     it 'say_something' do 
       expect( david.say_something).to eq "Hello, I am your son."

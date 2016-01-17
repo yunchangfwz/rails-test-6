@@ -3,7 +3,7 @@ FactoryGirl.define do
     first_name 'Mother'
     last_name  'last_name'
     gender     'female'
-    dob        Date.today - 20.years
+    dob        Date.today - 18.years
   end
 
 end
