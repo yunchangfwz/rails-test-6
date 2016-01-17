@@ -4,19 +4,20 @@ RSpec.describe Person, type: :model do
   context 'validations' do
     it { is_expected.to validate_presence_of :first_name }
     it { is_expected.to validate_presence_of :last_name }
+    it { is_expected.to validate_presence_of :gender}
   end
 
   describe '#ensure_valid_age?' do
     let(:yunchang)  { build(:person) }
     context 'valid' do
       it "#{Date.today}" do
-        yunchang.dob = Date.today + 1.days
+        yunchang.dob = Date.today - 2.years
         expect(yunchang).to be_valid
       end
     end
 
     context 'invalid' do
-      dob = Date.today  - 1.days
+      dob = Date.today  + 2.years
       it "#{dob}" do
         yunchang.dob = dob
         expect(yunchang).to_not be_valid

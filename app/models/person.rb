@@ -43,6 +43,10 @@ class Person < ActiveRecord::Base
     false
   end
 
+  def brothers
+    nil
+  end
+
   def older_than(person)
     age - person.age
   end
@@ -54,7 +58,7 @@ class Person < ActiveRecord::Base
   protected
 
   def ensure_valid_age
-    return errors[:dob] << 'Invalid.' if dob? && age < self.class::MIN_AGE
+    return errors[:dob] << 'Invalid.' if dob.present? && age < self.class::MIN_AGE
   end
 
 end
