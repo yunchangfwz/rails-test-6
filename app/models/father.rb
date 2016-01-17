@@ -2,7 +2,7 @@ class Father < Person
   has_many :children, class_name: 'Child', :foreign_key => 'father_id'
   has_many :sons, -> (object) { merge(Son.where(gender: 'male')) }, class_name: Son, source: :children
   has_many :daughters, -> (object) { merge(Daughter.where(gender: 'female')) }, class_name: Daughter, source: :children
-
+  
   extend Enumerize
   enumerize :gender, in: [:male]
 
