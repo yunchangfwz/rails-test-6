@@ -7,6 +7,8 @@ RSpec.describe Mother, type: :model do
 
   context 'associations' do 
     it { is_expected.to have_many :children }
+    it { is_expected.to have_many :sons }
+    it { is_expected.to have_many :daughters }
   end
 
   describe 'function mother_of' do 
