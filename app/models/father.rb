@@ -9,7 +9,7 @@ class Father < Person
   MIN_AGE = 20
 
   def self.father_ids
-    Person.where("father_id >0").map(&id)
+    Person.where("father_id > 0").map(&:id)
   end
 
   def father_of?(person)

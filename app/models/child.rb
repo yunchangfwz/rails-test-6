@@ -17,9 +17,6 @@ class Child < Person
   protected
 
   def age_smaller_than_parent
-    if father_id.present?
-      father = Father.find(father_id)
-      return errors[:age] << 'Invalid.' if father_id.present? && father.older_than(self) >= Father::MIN_AGE
-    end
+    return errors[:age] << 'Invalid.' if father.present? && father.older_than(self) >= Father::MIN_AGE && mother.older_than(self) >= Mother::MIN_AGE
   end
 end

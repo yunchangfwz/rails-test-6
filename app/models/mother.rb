@@ -1,5 +1,5 @@
 class Mother < Person
-  has_many :children, class_name: 'Child', :foreign_key => 'mother_id'
+  has_many :children, class_name: Child, foreign_key: :mother_id
   has_many :sons, -> (object) { merge(Son.where(gender: 'male')) }, class_name: Son, source: :children
   has_many :daughters, -> (object) { merge(Daughter.where(gender: 'female')) }, class_name: Daughter, source: :children
 

@@ -52,7 +52,7 @@ class Person < ActiveRecord::Base
   end
 
   def parents
-    Person.where("id= ? or id = ?",father_id, mother_id)
+    Person.where("id= ? or id = ?", father_id, mother_id)
   end
 
   protected
